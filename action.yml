@@ -4,7 +4,7 @@ inputs:
   filePath:
     description: 'Path to the file to check dependencies for'
     required: true
-  filePath:
+  tsconfig:
     description: 'Path to the tsconfig'
     required: false
     default: './tsconfig.json'
