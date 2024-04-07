@@ -1,5 +1,10 @@
 name: 'Check Dependency Changes'
 description: 'Check if dependent files have changed since the last commit'
+
+branding:
+  icon: 'filter'
+  color: 'purple'
+      
 inputs:
   filePath:
     description: 'Path to the file to check dependencies for'
@@ -16,6 +21,3 @@ runs:
     using: 'node20'
     main: 'dist/index.js'
 
-    branding:
-      icon: 'filter'
-      color: 'purple'
