@@ -29,6 +29,8 @@ async function run(): Promise<void> {
     console.log("rootPath", rootPath);
 
     const tsConfigInput: string = getInput('tsConfigPath', { required: false });
+    console.log("tsConfigInput",tsConfigInput);
+    console.log("tsConfigInput.length !== 0 ",tsConfigInput.length !== 0 );
     const tsConfig: string = tsConfigInput.length !== 0 ? tsConfigInput : `${rootPath}/tsconfig.json`;
 
     const fullPath: string = `${rootPath}/${filePath}`;
