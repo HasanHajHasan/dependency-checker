@@ -1,0 +1,21 @@
+name: 'Check Dependency Changes'
+description: 'Check if dependent files have changed since the last commit'
+inputs:
+  filePath:
+    description: 'Path to the file to check dependencies for'
+    required: true
+  filePath:
+    description: 'Path to the tsconfig'
+    required: false
+    default: './tsconfig.json'
+outputs:
+  dependencyChanged:
+    description: 'Boolean indicating if any dependency has changed'
+
+runs:
+    using: 'node20'
+    main: 'dist/index.js'
+
+    branding:
+      icon: 'filter'
+      color: 'purple'
