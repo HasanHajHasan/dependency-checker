@@ -47,4 +47,3 @@ If you would like to contribute to the development of this action, please refer 
 ## License
 
 This project is licensed under the MIT License - see the `LICENSE` file for details.
-
