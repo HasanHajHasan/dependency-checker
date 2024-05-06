@@ -64,7 +64,7 @@ async function run(): Promise<void> {
 
           console.log("nonExistent :", nonExistentFiles);
           if (nonExistentFiles.length > 0) {
-            setFailed(`The following files were referenced but could not be found: ${nonExistentFiles.join(', ')}`);
+            console.warn(`The following files were referenced but could not be found: ${nonExistentFiles.join(', ')}`);
           }
           console.log("tree :", tree);
           dependencyChanged = tree.some(file => changedFiles.includes(file.replace(`${rootPath}/`, '')));
