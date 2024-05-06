@@ -18,25 +18,19 @@ interface DependencyTreeOptions {
 async function run(): Promise<void> {
   try {
     const filePath: string = getInput('filePath', { required: true });
-    console.log("filePath", filePath);
-
     const rootPath: string | undefined = process.env.GITHUB_WORKSPACE;
     if (!rootPath) {
       setFailed("GITHUB_WORKSPACE is not defined.");
       return;
     }
 
-    console.log("rootPath", rootPath);
-
     const tsConfigInput: string = getInput('tsConfigPath', { required: false });
-    console.log("tsConfigInput",tsConfigInput);
-    console.log("tsConfigInput.length !== 0 ",tsConfigInput.length !== 0 );
     const tsConfig: string = tsConfigInput.length !== 0 ? tsConfigInput : `${rootPath}/tsconfig.json`;
 
     const fullPath: string = `${rootPath}/${filePath}`;
-    console.log("tsConfig", tsConfig);
-    console.log("fullPath", fullPath);
-
+    console.log("File path:", filePath);
+    console.log("Full file path to check:", fullPath);
+    
     if (!fs.existsSync(fullPath)) {
       setFailed(`The file "${filePath}" does not exist.`);
       return;
@@ -48,14 +42,11 @@ async function run(): Promise<void> {
 
     try {
       const commitCount: string = execSync('git rev-list --count HEAD', { encoding: 'utf8' }).trim();
-      console.log("commitCount", commitCount);
 
       if (parseInt(commitCount, 10) > 1) {
         changedFiles = execSync('git diff --name-only HEAD HEAD~1', { encoding: 'utf8' })
           .split('\n')
           .filter(Boolean);
-
-        console.log("changedFiles", changedFiles);
 
         if (changedFiles.length > 0) {
           const tree: string[] = dependencyTree.toList({
@@ -70,8 +61,6 @@ async function run(): Promise<void> {
             noTypeDefinitions: false
           } as DependencyTreeOptions);
 
-          console.log("tree", tree);
-          console.log("nonExistentFiles", nonExistentFiles);
 
           if (nonExistentFiles.length > 0) {
             setFailed(`The following files were referenced but could not be found: ${nonExistentFiles.join(', ')}`);
