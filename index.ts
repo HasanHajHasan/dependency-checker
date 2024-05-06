@@ -30,7 +30,8 @@ async function run(): Promise<void> {
     const fullPath: string = `${rootPath}/${filePath}`;
     console.log("File path:", filePath);
     console.log("Full file path to check:", fullPath);
-    
+    console.log("tsConfigInput :", tsConfigInput);
+    console.log("tsconfig :", tsConfig);
     if (!fs.existsSync(fullPath)) {
       setFailed(`The file "${filePath}" does not exist.`);
       return;
@@ -61,11 +62,11 @@ async function run(): Promise<void> {
             noTypeDefinitions: false
           } as DependencyTreeOptions);
 
-
+          console.log("nonExistent :", nonExistentFiles);
           if (nonExistentFiles.length > 0) {
             setFailed(`The following files were referenced but could not be found: ${nonExistentFiles.join(', ')}`);
           }
-
+          console.log("tree :", tree);
           dependencyChanged = tree.some(file => changedFiles.includes(file.replace(`${rootPath}/`, '')));
         }
       } else {
