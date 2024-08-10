@@ -6,6 +6,10 @@ branding:
   color: 'purple'
       
 inputs:
+  fileSeparator:
+    description: "Split character for output strings."
+    required: false
+    default: ","
   filePath:
     description: 'Path to the file to check dependencies for'
     required: true
