@@ -43,12 +43,12 @@ async function run(): Promise<void> {
 
     try {
       const commitCount: string = execSync('git rev-list --count HEAD', { encoding: 'utf8' }).trim();
-
+      console.log("commitCount :", commitCount);
       if (parseInt(commitCount, 10) > 1) {
         changedFiles = execSync('git diff --name-only HEAD HEAD~1', { encoding: 'utf8' })
           .split('\n')
           .filter(Boolean);
-
+          console.log("changedFiles :", changedFiles);
         if (changedFiles.length > 0) {
           const tree: string[] = dependencyTree.toList({
             filename: fullPath,
